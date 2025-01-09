@@ -8,8 +8,8 @@ namespace Workboard.Domain.Entities
 {
     public class Tarefa
     {
-        public Guid Id { get; set; }
-        public Guid IdProjeto { get; set; }
+        public int Id { get; set; }
+        public int IdProjeto { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public DateTime DtaVencimento { get; set; }
@@ -20,7 +20,7 @@ namespace Workboard.Domain.Entities
         public ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
         public ICollection<TarefaLog> TarefaLog { get; set; } = new List<TarefaLog>();
 
-        public Tarefa(Guid id, Guid idProjeto, string titulo, string descricao, DateTime dtaVencimento, DateTime dtaCadastro, status status, prioridade prioridade)
+        public Tarefa(int id, int idProjeto, string titulo, string descricao, DateTime dtaVencimento, DateTime dtaCadastro, status status, prioridade prioridade)
         {
             Id = id;
             IdProjeto = idProjeto;

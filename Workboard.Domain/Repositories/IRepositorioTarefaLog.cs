@@ -7,7 +7,7 @@ using Workboard.Domain.Entities;
 
 namespace Workboard.Domain.Repositories
 {
-    public interface IRepositorioWorkboard : IRepositorioBase<Projeto>, IRepositorioBase<Tarefa>, IRepositorioBase<Usuario>, IRepositorioBase<Comentario>, IRepositorioBase<TarefaLog>
+    public  interface IRepositorioTarefaLog:IRepositorioBase<TarefaLog>
     {
     }
 }

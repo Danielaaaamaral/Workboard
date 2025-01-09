@@ -9,11 +9,12 @@ using Workboard.Infrastructure.Data;
 
 namespace Workboard.Infrastructure.Repositories
 {
-    public class RepositorioWorkboard : RepositorioBase<Tarefa>
+   
+    public class RepositorioTarefaLog : RepositorioBase<TarefaLog>, IRepositorioTarefaLog
     {
         private readonly SqlContext _context;
 
-        public RepositorioWorkboard(SqlContext context)
+        public RepositorioTarefaLog(SqlContext context)
         {
             _context = context;
         }

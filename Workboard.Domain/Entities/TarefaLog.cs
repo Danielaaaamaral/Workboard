@@ -8,15 +8,15 @@ namespace Workboard.Domain.Entities
 {
     public class TarefaLog
     {
-        public Guid Id { get; set; }
-        public Guid IdTarefa { get; set; }
-        public Guid IdUsuario{ get; set; }
+        public int Id { get; set; }
+        public int IdTarefa { get; set; }
+        public int IdUsuario{ get; set; }
         public status Status { get; set; }
         public DateTime DtaAlteracao { get; set; }
         public  Usuario Usuario { get; set; }
         public Tarefa Tarefa { get; set; }
 
-        public TarefaLog(Guid id, Guid idTareda, Guid idUsuario, status status, DateTime dtaAlteracao)
+        public TarefaLog(int id, int idTareda, int idUsuario, status status, DateTime dtaAlteracao)
         {
             Id = id;
             IdTarefa = idTareda;
