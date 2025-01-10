@@ -135,6 +135,13 @@ namespace Workboard.Application.Services
             var t = mapper.Map<Tarefa>(obj);
             _tarefaService.Update(t);
         }
+        public IEnumerable<TarefaDTO> TarefaGetByIdProjeto(int id)
+        {
+            var tarefas = _tarefaService.TarefaGetByIdProjeto(id);
+            var tarefasDTO = mapper.Map<IEnumerable<TarefaDTO>>(tarefas);
+            return tarefasDTO;
+        }
+
         #endregion
         #region Tarefa Log
         public void TarefaLogAdd(TarefaLogDTO obj)
@@ -170,6 +177,7 @@ namespace Workboard.Application.Services
         }
 
        
+
         #endregion
     }
 }

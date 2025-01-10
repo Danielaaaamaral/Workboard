@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace Workboard.Infrastructure.Services
         public TarefaService(IRepositorioTarefa repositorio) : base(repositorio)
         {
             _repositorioTarefa = repositorio;
+        }
+
+        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id)
+        {
+           return _repositorioTarefa.TarefaGetByIdProjeto(id);
         }
     }
 }

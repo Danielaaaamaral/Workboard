@@ -9,5 +9,6 @@ namespace Workboard.Domain.Repositories
 {
     public interface IRepositorioTarefa:IRepositorioBase<Tarefa>
     {
+        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id);
     }
 }

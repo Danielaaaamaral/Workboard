@@ -9,5 +9,8 @@ namespace Workboard.Domain.Services
 {
     public interface ITarefaService:IServiceBase<Tarefa>
     {
+        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id);
+       
+
     }
 }

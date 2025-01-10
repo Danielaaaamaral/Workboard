@@ -68,8 +68,6 @@ namespace Workboard.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
-            if (id <= 0)
-                return BadRequest("O ID do projeto deve ser maior que zero.");
 
             try
             {

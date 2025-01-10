@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,17 @@ namespace Workboard.Infrastructure.Repositories
         public RepositorioTarefa(SqlContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id)
+        {
+           return _context.Tarefa
+                .Where(x=>x.IdProjeto == id)
+                .Include(x=>x.Comentarios)
+                .ThenInclude(x=>x.Usuario)
+                .Include(x=>x.TarefaLog)
+                .ThenInclude(x=>x.Usuario).ToList();
+
         }
     }
 }

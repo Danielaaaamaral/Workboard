@@ -37,6 +37,7 @@ namespace Workboard.Application.Interfaces
         void TarefaAdd(TarefaDTO obj);
 
         TarefaDTO TarefaGetById(int id);
+        IEnumerable<TarefaDTO> TarefaGetByIdProjeto(int id);
 
         IEnumerable<TarefaDTO> TarefaGetAll();
 
