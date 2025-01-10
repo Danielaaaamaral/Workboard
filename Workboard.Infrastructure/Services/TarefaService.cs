@@ -18,9 +18,15 @@ namespace Workboard.Infrastructure.Services
             _repositorioTarefa = repositorio;
         }
 
+        public Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate)
+        {
+             return _repositorioTarefa.Relatorio(sinceDate);
+        }
+
         public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id)
         {
            return _repositorioTarefa.TarefaGetByIdProjeto(id);
         }
+
     }
 }

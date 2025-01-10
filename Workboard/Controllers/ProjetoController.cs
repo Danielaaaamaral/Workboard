@@ -24,44 +24,84 @@ namespace Workboard.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProjetoById(int Id)
         {
-            var projects = _service.ProjetoGetById(Id);
+            try
+            {
+                var projects = _service.ProjetoGetById(Id);
 
-            var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
+                var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
 
-            return Ok(projectDTOs);
+                return Ok(projectDTOs);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAllProjeto()
         {
-            return Ok(_service.ProjetoGetAll());
+            try
+            {
+                return Ok(_service.ProjetoGetAll());
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
         [HttpGet("{idUsuario}")]
         public async Task<IActionResult> GetProjetoByUser(int idUsuario)
         {
+            try
+            {
+                var projects = _service.GetByUserIdAsync(idUsuario);
 
-            var projects = _service.GetByUserIdAsync(idUsuario);
+                var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
 
-            var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
-
-            return Ok(projectDTOs);
+                return Ok(projectDTOs);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
         // POST
         [HttpPost]
         public async Task<IActionResult> CreateProject([FromBody] ProjetoDTO projetoDTO)
         {
-            if (projetoDTO == null)
-                return BadRequest("As informações projeto são obrigatórios.");
+            try
+            {
+                if (projetoDTO == null)
+                    return BadRequest("As informações projeto são obrigatórios.");
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
+                _service.ProjetoAdd(projetoDTO);
 
-            _service.ProjetoAdd(projetoDTO);
-
-            var projectDTO = _mapper.Map<ProjetoDTO>(projetoDTO);
-
-            return CreatedAtAction(nameof(GetProjetoById), new { id = projectDTO.Id }, projectDTO);
+                return Ok(projetoDTO);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // DELETE: api/Projects/5

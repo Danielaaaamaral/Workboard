@@ -29,5 +29,12 @@ namespace Workboard.Infrastructure.Repositories
                 .ThenInclude(x=>x.Usuario).ToList();
 
         }
+        public async Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate)
+        {
+            return await _context.Tarefa
+                .Include(t => t.Comentarios)
+                .Where(t => t.Status.Equals("CONCLUIDA") && t.DtaVencimento >= sinceDate)
+                .ToListAsync();
+        }
     }
 }

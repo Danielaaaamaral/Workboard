@@ -17,7 +17,7 @@ namespace Workboard.Application.Services
         private readonly ITarefaLogService _logService;
         private readonly IProjetoService _projetoService;
         private readonly IComentarioService _comentarioService;
-        private readonly IUsuarioService _suarioService;
+        private readonly IUsuarioService _usuarioService;
 
         private readonly IMapper mapper;
 
@@ -27,7 +27,7 @@ namespace Workboard.Application.Services
             _logService = logService;
             _projetoService = projetoService;
             _comentarioService = comentarioService;
-            _suarioService = suarioService;
+            _usuarioService = suarioService;
             this.mapper = mapper;
         }
         #region Comentario
@@ -176,8 +176,45 @@ namespace Workboard.Application.Services
             _logService.Update(pe);
         }
 
-       
 
+
+        #endregion
+        #region Relatorio
+        public async Task<Relatorio>GetRelatorioAsync(int IdUsuario)
+        {
+            try
+            {
+
+                var user =  _usuarioService.GetById(IdUsuario);
+                if( user != null && user.TipoUsuario.Equals("Gerente"))
+                {
+                    throw new UnauthorizedAccessException("Usuário não tem permissão para gerar este relatório.");
+                }
+                
+                DateTime dtaVenci = DateTime.UtcNow.AddDays(-30);
+                var conteudo = await _tarefaService.Relatorio(dtaVenci);
+                var IdTarefas = conteudo.Select(x=>x.Id).ToList();
+                var IdUsuarios = conteudo.Select(x=>x.Projeto.IdUsuario).ToList();
+                int countTarefas = conteudo.Count();
+
+                var report = new Relatorio
+                { 
+                    TotalTarefas = countTarefas,
+                    TotalUsuarios = IdUsuarios.Count(),
+                    ListIdUsuarios = IdUsuarios,
+                    ListIdTarefas = IdTarefas,
+                    DataVencimento = dtaVenci,
+                    DataRelatorio = DateTime.UtcNow,
+                };
+                return report;
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }
+
+        }
         #endregion
     }
 }

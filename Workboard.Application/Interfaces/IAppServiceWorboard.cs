@@ -58,5 +58,7 @@ namespace Workboard.Application.Interfaces
         void TarefaLogRemove(TarefaLogDTO obj);
         #endregion
 
+        Task<Relatorio> GetRelatorioAsync(int IdUsuario);
+
     }
 }

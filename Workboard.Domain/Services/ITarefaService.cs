@@ -10,7 +10,9 @@ namespace Workboard.Domain.Services
     public interface ITarefaService:IServiceBase<Tarefa>
     {
         public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id);
-       
+        public Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate);
+
+
 
     }
 }

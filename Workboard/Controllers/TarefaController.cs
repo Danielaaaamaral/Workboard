@@ -26,20 +26,42 @@ namespace Workboard.Controllers
         [HttpGet("Projeto/{Idprojeto}")]
         public async Task<IActionResult> GetbyIdProjeto(int Idprojeto)
         {
+            try { 
             var tarefas = _service.TarefaGetByIdProjeto(Idprojeto);
             return Ok(tarefas);
-           
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+
         }
 
         // GET api/<TarefaController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetbyId(int id)
         {
-            var tarefa = _service.TarefaGetById(id);
-            if (tarefa == null)
-                return BadRequest("Tarefa não encontrada");
+            try
+            {
+                var tarefa = _service.TarefaGetById(id);
+                if (tarefa == null)
+                    return BadRequest("Tarefa não encontrada");
 
-            return Ok(tarefa);
+                return Ok(tarefa);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // POST api/<TarefaController>
@@ -55,6 +77,10 @@ namespace Workboard.Controllers
             catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
         }
 
@@ -74,6 +100,10 @@ namespace Workboard.Controllers
             {
                 return NotFound(ex.Message);
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/<TarefaController>/5
@@ -90,6 +120,10 @@ namespace Workboard.Controllers
             catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

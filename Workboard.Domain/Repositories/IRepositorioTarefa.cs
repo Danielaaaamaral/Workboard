@@ -10,5 +10,6 @@ namespace Workboard.Domain.Repositories
     public interface IRepositorioTarefa:IRepositorioBase<Tarefa>
     {
         public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id);
+        public Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate);
     }
 }
