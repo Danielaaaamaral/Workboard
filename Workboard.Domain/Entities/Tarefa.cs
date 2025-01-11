@@ -14,13 +14,13 @@ namespace Workboard.Domain.Entities
         public string Descricao { get; set; }
         public DateTime DtaVencimento { get; set; }
         public DateTime DtaCadastro { get; set; }
-        public status Status { get; set; }
-        public prioridade Prioridade { get; set; }
+        public string Status { get; set; }
+        public string Prioridade { get; set; }
         public Projeto Projeto { get; set; }
         public ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
         public ICollection<TarefaLog> TarefaLog { get; set; } = new List<TarefaLog>();
 
-        public Tarefa(int id, int idProjeto, string titulo, string descricao, DateTime dtaVencimento, DateTime dtaCadastro, status status, prioridade prioridade)
+        public Tarefa(int id, int idProjeto, string titulo, string descricao, DateTime dtaVencimento, DateTime dtaCadastro, string status, string prioridade)
         {
             Id = id;
             IdProjeto = idProjeto;
@@ -32,15 +32,6 @@ namespace Workboard.Domain.Entities
             Prioridade = prioridade;
         }
 
-        public enum status
-        {
-            PENDENTE,
-            ANDAMENTO,
-            CONCLUIDA
-
-        }
-        public enum prioridade { 
-            BAIXA,MEDIA,ALTA
-        }
+  
     }
 }
