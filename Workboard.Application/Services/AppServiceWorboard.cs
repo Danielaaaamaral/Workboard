@@ -31,149 +31,149 @@ namespace Workboard.Application.Services
             this.mapper = mapper;
         }
         #region Comentario
-        public void ComentarioAdd(ComentarioDTO obj)
+        public async Task ComentarioAdd(ComentarioDTO obj)
         {
             var com = mapper.Map<Comentario>(obj);
-            _comentarioService.Add(com);
+            await _comentarioService.Add(com);
         }
 
-        public IEnumerable<ComentarioDTO> ComentarioGetAll()
+        public async Task<IEnumerable<ComentarioDTO>> ComentarioGetAll()
         {
-            var comentarios = _comentarioService.GetAll();
+            var comentarios = await _comentarioService.GetAll();
             var comentariosDto = mapper.Map<IEnumerable<ComentarioDTO>>(comentarios);
             return comentariosDto;
         }
 
-        public ComentarioDTO ComentarioGetById(int id)
+        public async Task<ComentarioDTO> ComentarioGetById(int id)
         {
-            var c = _comentarioService.GetById(id);
+            var c = await _comentarioService.GetById(id);
             var cDto = mapper.Map<ComentarioDTO>(c);
             return cDto;
         }
 
-        public void ComentarioRemove(ComentarioDTO obj)
+        public async Task ComentarioRemove(ComentarioDTO obj)
         {
             var comentario = mapper.Map<Comentario>(obj);
-            _comentarioService.Remove(comentario);
+           await _comentarioService.Remove(comentario);
         }
 
-        public void ComentarioUpdate(ComentarioDTO obj)
+        public async Task ComentarioUpdate(ComentarioDTO obj)
         {
             var c = mapper.Map<Comentario>(obj);
-            _comentarioService.Update(c);
+           await _comentarioService.Update(c);
         }
         #endregion
         #region Projeto
-        public void ProjetoAdd(ProjetoDTO obj)
+        public async Task ProjetoAdd(ProjetoDTO obj)
         {
             var pro = mapper.Map<Projeto>(obj);
-            _projetoService.Add(pro);
+            await _projetoService.Add(pro);
         }
 
-        public IEnumerable<ProjetoDTO> ProjetoGetAll()
+        public async Task<IEnumerable<ProjetoDTO>> ProjetoGetAll()
         {
-            var projetos = _projetoService.GetAll();
+            var projetos =await _projetoService.GetAll();
             var projetosDto = mapper.Map<IEnumerable<ProjetoDTO>>(projetos);
             return projetosDto;
         }
 
-        public ProjetoDTO ProjetoGetById(int id)
+        public async Task<ProjetoDTO> ProjetoGetById(int id)
         {
-            var p = _projetoService.GetById(id);
+            var p = await _projetoService.GetById(id);
             var pDto = mapper.Map<ProjetoDTO>(p);
             return pDto;
         }
        
-        public ProjetoDTO GetByUserIdAsync(int userId)
+        public async Task<ProjetoDTO> GetByUserIdAsync(int userId)
         {
-            var p = _projetoService.GetByUserIdAsync(userId);
+            var p = await _projetoService.GetByUserIdAsync(userId);
             var pDto = mapper.Map<ProjetoDTO>(p);
             return pDto;
         }
 
-        public void ProjetoRemove(ProjetoDTO obj)
+        public async Task ProjetoRemove(ProjetoDTO obj)
         {
             var pe = mapper.Map<Projeto>(obj);
-            _projetoService.Remove(pe);
+           await _projetoService.Remove(pe);
         }
 
-        public void ProjetoUpdate(ProjetoDTO obj)
+        public async Task ProjetoUpdate(ProjetoDTO obj)
         {
             var p = mapper.Map<Projeto>(obj);
-            _projetoService.Update(p);
+           await _projetoService.Update(p);
         }
         #endregion
         #region Tarefa
-        public void TarefaAdd(TarefaDTO obj)
+        public async Task TarefaAdd(TarefaDTO obj)
         {
             var tarefa = mapper.Map<Tarefa>(obj);
-            _tarefaService.Add(tarefa);
+            await _tarefaService.Add(tarefa);
         }
 
-        public IEnumerable<TarefaDTO> TarefaGetAll()
+        public async Task<IEnumerable<TarefaDTO>> TarefaGetAll()
         {
-            var tarefa = _tarefaService.GetAll();
+            var tarefa = await _tarefaService.GetAll();
             var tarefaDto = mapper.Map<IEnumerable<TarefaDTO>>(tarefa);
             return tarefaDto;
         }
 
-        public TarefaDTO TarefaGetById(int id)
+        public async Task<TarefaDTO> TarefaGetById(int id)
         {
-            var t = _tarefaService.GetById(id);
+            var t =await _tarefaService.GetById(id);
             var tDto = mapper.Map<TarefaDTO>(t);
             return tDto;
         }
 
-        public void TarefaRemove(TarefaDTO obj)
+        public async Task TarefaRemove(TarefaDTO obj)
         {
             var t = mapper.Map<Tarefa>(obj);
-            _tarefaService.Remove(t);
+            await _tarefaService.Remove(t);
         }
 
-        public void TarefaUpdate(TarefaDTO obj)
+        public async Task TarefaUpdate(TarefaDTO obj)
         {
             var t = mapper.Map<Tarefa>(obj);
-            _tarefaService.Update(t);
+           await _tarefaService.Update(t);
         }
-        public IEnumerable<TarefaDTO> TarefaGetByIdProjeto(int id)
+        public async Task<IEnumerable<TarefaDTO>> TarefaGetByIdProjeto(int id)
         {
-            var tarefas = _tarefaService.TarefaGetByIdProjeto(id);
+            var tarefas = await _tarefaService.TarefaGetByIdProjeto(id);
             var tarefasDTO = mapper.Map<IEnumerable<TarefaDTO>>(tarefas);
             return tarefasDTO;
         }
 
         #endregion
         #region Tarefa Log
-        public void TarefaLogAdd(TarefaLogDTO obj)
+        public async Task TarefaLogAdd(TarefaLogDTO obj)
         {
             var tarefa = mapper.Map<TarefaLog>(obj);
-            _logService.Add(tarefa);
+            await _logService.Add(tarefa);
         }
 
-        public IEnumerable<TarefaLogDTO> TarefaLogGetAll()
+        public async Task<IEnumerable<TarefaLogDTO>> TarefaLogGetAll()
         {
-            var tarefa = _logService.GetAll();
+            var tarefa =await _logService.GetAll();
             var tarefaDto = mapper.Map<IEnumerable<TarefaLogDTO>>(tarefa);
             return tarefaDto;
         }
 
-        public TarefaLogDTO TarefaLogGetById(int id)
+        public async Task<TarefaLogDTO> TarefaLogGetById(int id)
         {
-            var t = _logService.GetById(id);
+            var t =await _logService.GetById(id);
             var tDto = mapper.Map<TarefaLogDTO>(t);
             return tDto;
         }
 
-        public void TarefaLogRemove(TarefaLogDTO obj)
+        public async Task TarefaLogRemove(TarefaLogDTO obj)
         {
             var tl = mapper.Map<TarefaLog>(obj);
-            _logService.Remove(tl);
+            await _logService.Remove(tl);
         }
 
-        public void TarefaLogUpdate(TarefaLogDTO obj)
+        public async Task TarefaLogUpdate(TarefaLogDTO obj)
         {
             var pe = mapper.Map<TarefaLog>(obj);
-            _logService.Update(pe);
+           await _logService.Update(pe);
         }
 
 
@@ -185,7 +185,7 @@ namespace Workboard.Application.Services
             try
             {
 
-                var user =  _usuarioService.GetById(IdUsuario);
+                var user = await _usuarioService.GetById(IdUsuario);
                 if( user != null && user.TipoUsuario.Equals("Gerente"))
                 {
                     throw new UnauthorizedAccessException("Usuário não tem permissão para gerar este relatório.");

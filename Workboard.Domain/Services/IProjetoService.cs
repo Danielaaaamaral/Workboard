@@ -9,6 +9,6 @@ namespace Workboard.Domain.Services
 {
     public interface IProjetoService: IServiceBase<Projeto>
     {
-       IEnumerable<Projeto> GetByUserIdAsync(int userId);
+       Task<IEnumerable<Projeto>> GetByUserIdAsync(int userId);
     }
 }

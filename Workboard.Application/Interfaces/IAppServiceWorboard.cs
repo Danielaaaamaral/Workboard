@@ -11,51 +11,51 @@ namespace Workboard.Application.Interfaces
     public interface IAppServiceWorboard
     {
         #region Comentario
-        void ComentarioAdd(ComentarioDTO obj);
+        Task ComentarioAdd(ComentarioDTO obj);
 
-        ComentarioDTO ComentarioGetById(int id);
+        Task<ComentarioDTO> ComentarioGetById(int id);
 
-        IEnumerable<ComentarioDTO> ComentarioGetAll();
+        Task<IEnumerable<ComentarioDTO>> ComentarioGetAll();
 
-        void ComentarioUpdate(ComentarioDTO obj);
+        Task ComentarioUpdate(ComentarioDTO obj);
 
-        void ComentarioRemove(ComentarioDTO obj);
+        Task ComentarioRemove(ComentarioDTO obj);
         #endregion
         #region Projeto
-        void ProjetoAdd(ProjetoDTO obj);
+        Task ProjetoAdd(ProjetoDTO obj);
 
-        ProjetoDTO ProjetoGetById(int id);
+        Task<ProjetoDTO> ProjetoGetById(int id);
 
-        IEnumerable<ProjetoDTO> ProjetoGetAll();
+        Task<IEnumerable<ProjetoDTO>> ProjetoGetAll();
 
-        void ProjetoUpdate(ProjetoDTO obj);
+        Task ProjetoUpdate(ProjetoDTO obj);
 
-        void ProjetoRemove(ProjetoDTO obj);
-       ProjetoDTO GetByUserIdAsync(int userId);
+        Task ProjetoRemove(ProjetoDTO obj);
+        Task<ProjetoDTO> GetByUserIdAsync(int userId);
         #endregion
         #region Tarefa
-        void TarefaAdd(TarefaDTO obj);
+        Task TarefaAdd(TarefaDTO obj);
 
-        TarefaDTO TarefaGetById(int id);
-        IEnumerable<TarefaDTO> TarefaGetByIdProjeto(int id);
+        Task<TarefaDTO> TarefaGetById(int id);
+        Task<IEnumerable<TarefaDTO>> TarefaGetByIdProjeto(int id);
 
-        IEnumerable<TarefaDTO> TarefaGetAll();
+        Task<IEnumerable<TarefaDTO>> TarefaGetAll();
 
-        void TarefaUpdate(TarefaDTO obj);
+        Task TarefaUpdate(TarefaDTO obj);
 
-        void TarefaRemove(TarefaDTO obj);
+        Task TarefaRemove(TarefaDTO obj);
         #endregion
 
         #region TarefaLOG
-        void TarefaLogAdd(TarefaLogDTO obj);
+        Task TarefaLogAdd(TarefaLogDTO obj);
 
-        TarefaLogDTO TarefaLogGetById(int id);
+        Task<TarefaLogDTO> TarefaLogGetById(int id);
 
-        IEnumerable<TarefaLogDTO> TarefaLogGetAll();
+        Task<IEnumerable<TarefaLogDTO>> TarefaLogGetAll();
 
-        void TarefaLogUpdate(TarefaLogDTO obj);
+        Task TarefaLogUpdate(TarefaLogDTO obj);
 
-        void TarefaLogRemove(TarefaLogDTO obj);
+        Task TarefaLogRemove(TarefaLogDTO obj);
         #endregion
 
         Task<Relatorio> GetRelatorioAsync(int IdUsuario);

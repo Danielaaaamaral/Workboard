@@ -18,14 +18,14 @@ namespace Workboard.Infrastructure.Services
             _repositorioTarefa = repositorio;
         }
 
-        public Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate)
+        public async Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate)
         {
-             return _repositorioTarefa.Relatorio(sinceDate);
+             return await _repositorioTarefa.Relatorio(sinceDate);
         }
 
-        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id)
+        public async Task<IEnumerable<Tarefa>> TarefaGetByIdProjeto(int id)
         {
-           return _repositorioTarefa.TarefaGetByIdProjeto(id);
+           return await _repositorioTarefa.TarefaGetByIdProjeto(id);
         }
 
     }

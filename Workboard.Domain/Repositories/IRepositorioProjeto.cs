@@ -9,6 +9,6 @@ namespace Workboard.Domain.Repositories
 {
     public interface IRepositorioProjeto : IRepositorioBase<Projeto>
     {
-    public IEnumerable<Projeto> GetByUserIdAsync(int userId);
+    Task<IEnumerable<Projeto>> GetByUserIdAsync(int userId);
     }
 }

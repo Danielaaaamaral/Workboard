@@ -19,14 +19,14 @@ namespace Workboard.Infrastructure.Repositories
             _context = context;
         }
 
-        public IEnumerable<Tarefa> TarefaGetByIdProjeto(int id)
+        public async Task<IEnumerable<Tarefa>> TarefaGetByIdProjeto(int id)
         {
-           return _context.Tarefa
+           return await _context.Tarefa
                 .Where(x=>x.IdProjeto == id)
                 .Include(x=>x.Comentarios)
                 .ThenInclude(x=>x.Usuario)
                 .Include(x=>x.TarefaLog)
-                .ThenInclude(x=>x.Usuario).ToList();
+                .ThenInclude(x=>x.Usuario).ToListAsync();
 
         }
         public async Task<IEnumerable<Tarefa>> Relatorio(DateTime sinceDate)

@@ -27,7 +27,7 @@ namespace Workboard.Controllers
         public async Task<IActionResult> GetbyIdProjeto(int Idprojeto)
         {
             try { 
-            var tarefas = _service.TarefaGetByIdProjeto(Idprojeto);
+            var tarefas =await _service.TarefaGetByIdProjeto(Idprojeto);
             return Ok(tarefas);
             }
             catch (InvalidOperationException ex)
@@ -48,7 +48,7 @@ namespace Workboard.Controllers
         {
             try
             {
-                var tarefa = _service.TarefaGetById(id);
+                var tarefa = await _service.TarefaGetById(id);
                 if (tarefa == null)
                     return BadRequest("Tarefa não encontrada");
 
@@ -70,7 +70,7 @@ namespace Workboard.Controllers
         {
             try
             {
-                 _service.TarefaAdd(tarefaDto);
+                await _service.TarefaAdd(tarefaDto);
 
                 return Ok(tarefaDto);
             }
@@ -92,7 +92,7 @@ namespace Workboard.Controllers
             {
                 var tarefaExist = _service.TarefaGetById(id);
                 if(tarefaExist != null)
-                _service.TarefaUpdate(tarefa);
+                await _service.TarefaUpdate(tarefa);
 
                 return NoContent();
             }
@@ -112,8 +112,8 @@ namespace Workboard.Controllers
         {
             try
             {
-                var tarefa = _service.TarefaGetById(id);
-                _service.TarefaRemove(tarefa);
+                var tarefa =await _service.TarefaGetById(id);
+                await _service.TarefaRemove(tarefa);
 
                 return NoContent();
             }

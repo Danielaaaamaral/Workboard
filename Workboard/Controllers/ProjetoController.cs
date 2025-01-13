@@ -26,7 +26,7 @@ namespace Workboard.Controllers
         {
             try
             {
-                var projects = _service.ProjetoGetById(Id);
+                var projects = await _service.ProjetoGetById(Id);
 
                 var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
 
@@ -43,11 +43,11 @@ namespace Workboard.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetAllProjeto()
+        public async Task<ActionResult<IEnumerable<string>>>GetAllProjeto()
         {
             try
             {
-                return Ok(_service.ProjetoGetAll());
+                return Ok(await _service.ProjetoGetAll());
             }
             catch (InvalidOperationException ex)
             {
@@ -63,7 +63,7 @@ namespace Workboard.Controllers
         {
             try
             {
-                var projects = _service.GetByUserIdAsync(idUsuario);
+                var projects =await _service.GetByUserIdAsync(idUsuario);
 
                 var projectDTOs = _mapper.Map<IEnumerable<ProjetoDTO>>(projects);
 
@@ -90,7 +90,7 @@ namespace Workboard.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _service.ProjetoAdd(projetoDTO);
+                await _service.ProjetoAdd(projetoDTO);
 
                 return Ok(projetoDTO);
             }
@@ -111,7 +111,7 @@ namespace Workboard.Controllers
 
             try
             {
-                var projeto = _service.ProjetoGetById(id);
+                var projeto =await _service.ProjetoGetById(id);
                 if (projeto != null)
                     _service.ProjetoRemove(projeto);
 

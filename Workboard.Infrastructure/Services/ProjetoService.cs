@@ -17,9 +17,9 @@ namespace Workboard.Infrastructure.Services
             _repositorioProjeto = repositorio;
         }
 
-        public IEnumerable<Projeto> GetByUserIdAsync(int userId)
+        public async Task<IEnumerable<Projeto>> GetByUserIdAsync(int userId)
         {
-            return  _repositorioProjeto.GetByUserIdAsync(userId);
+            return await _repositorioProjeto.GetByUserIdAsync(userId);
         }
     }
 }

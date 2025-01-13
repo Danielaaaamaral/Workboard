@@ -13,7 +13,7 @@ namespace Workboard.Infrastructure.Repositories
     {
         private readonly SqlContext _context;
 
-        public void Add(TEntity obj)
+        public async Task  Add(TEntity obj)
         {
             try
             {
@@ -33,17 +33,17 @@ namespace Workboard.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return _context.Set<TEntity>().ToList();
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public void Remove(TEntity obj)
+        public async Task Remove(TEntity obj)
         {
             try
             {
@@ -57,11 +57,12 @@ namespace Workboard.Infrastructure.Repositories
             }
         }
 
-        public void Update(TEntity obj)
+        public async Task Update(TEntity obj)
         {
             try
             {
                 _context.Entry(obj).State = EntityState.Modified;
+                _context.Update(obj);
                 _context.SaveChanges();
 
             }

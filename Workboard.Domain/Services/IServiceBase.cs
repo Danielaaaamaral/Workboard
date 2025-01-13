@@ -8,14 +8,14 @@ namespace Workboard.Domain.Services
 {
     public interface IServiceBase<TEntity> where TEntity : class
     {
-        void Add(TEntity obj);
+        Task Add(TEntity obj);
 
-        TEntity GetById(int id);
+        Task<TEntity> GetById(int id);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAll();
 
-        void Update(TEntity obj);
+        Task Update(TEntity obj);
 
-        void Remove(TEntity obj);
+        Task Remove(TEntity obj);
     }
 }

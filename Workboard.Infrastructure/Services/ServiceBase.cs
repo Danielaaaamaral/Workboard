@@ -17,29 +17,29 @@ namespace Workboard.Infrastructure.Services
             _repository = repositorio;
         }
 
-        public void Add(TEntity obj)
+        public async Task Add(TEntity obj)
         {
-            _repository.Add(obj);
+           await _repository.Add(obj);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
 
-        public void Remove(TEntity obj)
+        public async Task Remove(TEntity obj)
         {
-            _repository.Remove(obj);
+           await _repository.Remove(obj);
         }
 
-        public void Update(TEntity obj)
+        public async Task Update(TEntity obj)
         {
-            _repository.Update(obj);
+            await _repository.Update(obj);
         }
     }
 }

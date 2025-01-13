@@ -20,12 +20,12 @@ namespace Workboard.Infrastructure.Repositories
             _context = context;
         }
 
-        public IEnumerable<Projeto> GetByUserIdAsync(int userId)
+        public async Task<IEnumerable<Projeto>> GetByUserIdAsync(int userId)
         {
-            return _context.Projeto
+            return await _context.Projeto
              .Where(p => p.IdUsuario == userId)
              .Include(p => p.Tarefa)
-             .ToList();
+             .ToListAsync();
         }
     }
 }
