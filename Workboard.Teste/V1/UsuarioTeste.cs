@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bogus;
-using Bogus.DataSets;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,22 +12,22 @@ using Workboard.Infrastructure.Services;
 
 namespace Workboard.Teste.V1
 {
-    public class TarefaTest
+    public class UsuarioTeste
     {
         private readonly IMapper _mapper;
-        private readonly Mock<IRepositorioTarefa> _mock;
-        private readonly TarefaService _service;
+        private readonly Mock<IRepositorioUsuario> _mock;
+        private readonly UsuarioService _service;
 
-        public TarefaTest()
+        public UsuarioTeste()
         {
-            _mock = new Mock<IRepositorioTarefa>();
-            _service = new TarefaService(_mock.Object);
+            _mock = new Mock<IRepositorioUsuario>();
+            _service = new UsuarioService(_mock.Object);
         }
         [Fact]
-        public async Task AdicionaTarefa()
+        public async Task AdicionaUsuario()
         {
-       
-            Tarefa t = gerarTarefa();
+
+            var t = gerarUsuario();
 
             _mock.Setup(x => x.Add(t));
             await _service.Add(t);
@@ -36,27 +35,27 @@ namespace Workboard.Teste.V1
 
         }
         [Fact]
-        public async Task RemoveTarefa()
+        public async Task RemoveUsuario()
         {
-           
-            Tarefa t = gerarTarefa();
+
+            var t = gerarUsuario();
 
             _mock.Setup(x => x.Remove(t));
             await _service.Remove(t);
 
         }
         [Fact]
-        public async Task UpdateTarefa()
+        public async Task UpdateUsuario()
         {
-           
-            Tarefa t = gerarTarefa();
+
+            var t = gerarUsuario();
             _mock.Setup(x => x.Update(t));
             await _service.Update(t);
 
 
         }
         [Fact]
-        public async void BuscaPorIdTarefa()
+        public async void BuscaPorIdUsuario()
         {
 
             var faker = new Faker();
@@ -66,25 +65,25 @@ namespace Workboard.Teste.V1
 
         }
         [Fact]
-        public async Task BuscaTarefa()
+        public async Task BuscaUsuario()
         {
             _mock.Setup(x => x.GetAll());
             await _service.GetAll();
 
         }
 
-        private Tarefa gerarTarefa()
+        private Usuario gerarUsuario()
         {
             var faker = new Faker();
-            Tarefa t = new Tarefa(faker.Random.Int(1),
+            Usuario u =new Usuario(
                 faker.Random.Int(1),
                 faker.Random.String(),
-                faker.Random.String(),
                 faker.Date.Future(),
-                faker.Date.Future(),
-                faker.Random.String(),
-                faker.Random.String());
-            return t;
+                tipoUsuario.Gerente
+                );
+           
+
+            return u;
         }
     }
 }

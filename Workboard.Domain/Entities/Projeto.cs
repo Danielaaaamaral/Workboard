@@ -15,13 +15,12 @@ namespace Workboard.Domain.Entities
         public Usuario Usuario  { get; set; }
         public ICollection<Tarefa> Tarefa { get; } = new List<Tarefa>();
 
-        public Projeto(int id, int idUsuario, DateTime dtaCadastro, string titulo, Usuario usuario)
+        public Projeto(int id, int idUsuario, DateTime dtaCadastro, string titulo)
         {
             Id = id;
             IdUsuario = idUsuario;
             DtaCadastro = dtaCadastro;
             Titulo = titulo;
-            Usuario = usuario;
         }
     }
 }

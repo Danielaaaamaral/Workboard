@@ -8,7 +8,7 @@ namespace Workboard.Domain.Entities
 {
     public  class Usuario
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime DtaCadastro { get; set; }
         public tipoUsuario TipoUsuario { get; set; }
@@ -17,7 +17,7 @@ namespace Workboard.Domain.Entities
         public ICollection<TarefaLog> TarefaLog { get; set; } = new List<TarefaLog>();
 
 
-        public Usuario(Guid id, string nome, DateTime dtaCadastro, tipoUsuario tipoUsuario)
+        public Usuario(int id, string nome, DateTime dtaCadastro, tipoUsuario tipoUsuario)
         {
             Id = id;
             Nome = nome;

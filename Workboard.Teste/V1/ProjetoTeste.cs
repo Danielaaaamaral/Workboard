@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bogus;
-using Bogus.DataSets;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,22 +12,22 @@ using Workboard.Infrastructure.Services;
 
 namespace Workboard.Teste.V1
 {
-    public class TarefaTest
+    public class ProjetoTeste
     {
         private readonly IMapper _mapper;
-        private readonly Mock<IRepositorioTarefa> _mock;
-        private readonly TarefaService _service;
+        private readonly Mock<IRepositorioProjeto> _mock;
+        private readonly ProjetoService _service;
 
-        public TarefaTest()
+        public ProjetoTeste()
         {
-            _mock = new Mock<IRepositorioTarefa>();
-            _service = new TarefaService(_mock.Object);
+            _mock = new Mock<IRepositorioProjeto>();
+            _service = new ProjetoService(_mock.Object);
         }
         [Fact]
-        public async Task AdicionaTarefa()
+        public async Task AdicionaProjeto()
         {
-       
-            Tarefa t = gerarTarefa();
+
+            Projeto t = gerarProjeto();
 
             _mock.Setup(x => x.Add(t));
             await _service.Add(t);
@@ -36,27 +35,27 @@ namespace Workboard.Teste.V1
 
         }
         [Fact]
-        public async Task RemoveTarefa()
+        public async Task RemoveProjeto()
         {
-           
-            Tarefa t = gerarTarefa();
+
+            Projeto t = gerarProjeto();
 
             _mock.Setup(x => x.Remove(t));
             await _service.Remove(t);
 
         }
         [Fact]
-        public async Task UpdateTarefa()
+        public async Task UpdateProjeto()
         {
-           
-            Tarefa t = gerarTarefa();
+
+            Projeto t = gerarProjeto();
             _mock.Setup(x => x.Update(t));
             await _service.Update(t);
 
 
         }
         [Fact]
-        public async void BuscaPorIdTarefa()
+        public async void BuscaPorIdProjeto()
         {
 
             var faker = new Faker();
@@ -66,25 +65,23 @@ namespace Workboard.Teste.V1
 
         }
         [Fact]
-        public async Task BuscaTarefa()
+        public async Task BuscaProjeto()
         {
             _mock.Setup(x => x.GetAll());
             await _service.GetAll();
 
         }
 
-        private Tarefa gerarTarefa()
+        private Projeto gerarProjeto()
         {
             var faker = new Faker();
-            Tarefa t = new Tarefa(faker.Random.Int(1),
+            Projeto p = new Projeto(
                 faker.Random.Int(1),
-                faker.Random.String(),
-                faker.Random.String(),
+                faker.Random.Int(),
                 faker.Date.Future(),
-                faker.Date.Future(),
-                faker.Random.String(),
                 faker.Random.String());
-            return t;
+          
+            return p;
         }
     }
 }

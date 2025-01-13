@@ -2,58 +2,75 @@
 using AutoMapper;
 using Bogus;
 using Bogus.DataSets;
+using Moq;
 using Moq.AutoMock;
 using Workboard.Application.Mappers;
 using Workboard.Domain.Entities;
 using Workboard.Domain.Repositories;
+using Workboard.Domain.Services;
+using Workboard.Infrastructure.Services;
 
 
 namespace Workboard.Teste.V1
 {
     public class ComentarioTest
     {
-        private readonly AutoMocker _mocker = new();
+
         private readonly IMapper _mapper;
+        private readonly Mock<IRepositorioComentario> _mockComentario;
+        private readonly ComentarioService _serviceComentario;
 
         public ComentarioTest()
         {
+            _mockComentario = new Mock<IRepositorioComentario>();
+            _serviceComentario=new ComentarioService(_mockComentario.Object);
         }
 
         [Fact]
-        public void AdicionaComentario()
+        public async Task AdicionaComentario()
         {
-            var faker = new Faker();
-            Comentario c = new Comentario(faker.Random.Int(1), faker.Random.Int(1), "teste");
 
-            _mocker.GetMock<IRepositorioComentario>().Setup(r => r.Add(c));
+            Comentario c = GerarComentario();
+
+           _mockComentario.Setup(x => x.Add(c));
+           await _serviceComentario.Add(c);
+
 
         }
-        public void RemoveComentario()
+        [Fact]
+        public async Task RemoveComentario()
         {
-            var faker = new Faker();
-            Comentario c = new Comentario(faker.Random.Int(1), faker.Random.Int(1), "teste");
 
-            _mocker.GetMock<IRepositorioComentario>().Setup(r => r.Remove(c));
+            Comentario c = GerarComentario();
+
+            _mockComentario.Setup(x=>x.Remove(c));
+           await _serviceComentario.Remove(c);
 
         }
-        public void UpdateComentario()
+        [Fact]
+        public async Task UpdateComentario()
         {
-            var faker = new Faker();
-            Comentario c = new Comentario(faker.Random.Int(1), faker.Random.Int(1), "teste");
+           
+            Comentario c = GerarComentario();
+            _mockComentario.Setup(x=>x.Update(c));
+            await _serviceComentario.Remove(c);
 
-            _mocker.GetMock<IRepositorioComentario>().Setup(r => r.Update(c));
 
         }
-        public void BuscaPorIdComentario()
+        [Fact]
+        public async void BuscaPorIdComentario()
         {
             var faker = new Faker();
             var id = faker.Random.Int(1);
-            _mocker.GetMock<IRepositorioComentario>().Setup(r => r.GetById(id));
+            _mockComentario.Setup(x=>x.GetById(id));
+            await _serviceComentario.GetById(id);
 
         }
-        public void BuscaComentarios()
+        [Fact]
+        public async Task BuscaComentarios()
         {
-            _mocker.GetMock<IRepositorioComentario>().Setup(r => r.GetAll());
+            _mockComentario.Setup(x=>x.GetAll());
+            await _serviceComentario.GetAll();
 
         }
         public static ICollection<Comentario> GerarListaComentario(int qtd)
@@ -72,6 +89,13 @@ namespace Workboard.Teste.V1
             }
 
             return listaComentario;
+        }
+        private Comentario GerarComentario()
+        {
+            var faker = new Faker();
+            Comentario c = new Comentario(faker.Random.Int(1), faker.Random.Int(1), "teste");
+            return c;
+
         }
     }
 }
